@@ -13,7 +13,7 @@ function App() {
 
   return (
     <div className="App">
-        React Template
+      <h1>React Template</h1>
 
       <ul style={{
         listStyle: 'none',
