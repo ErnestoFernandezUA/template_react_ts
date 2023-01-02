@@ -17,7 +17,16 @@ function App() {
   return (
     <div className="App">
         React Template
-      </div>
+
+      <ul style={{
+        listStyle: 'none',
+        textAlign: 'left',
+      }}>{posts.map(post => (
+        <li key={post.id}>{`${post.id} - ${post.title}: ${post.body}`}</li>
+      ))}
+
+      </ul>
+    </div>
   );
 }
 
