@@ -7,9 +7,6 @@ function App() {
   const dispatch = useAppDispatch();
   const posts = useAppSelector(selectPosts);
 
-  // eslint-disable-next-line no-console
-  console.log(posts);
-
   useEffect(() => {
     dispatch(getPostsAsync());
   }, [dispatch])
