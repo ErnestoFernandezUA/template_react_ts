@@ -3,5 +3,6 @@
 includes:
   - toolkit
   - persist
-  - fetch to api jsonplaceholder
+  - axios fetch to api jsonplaceholder
+  - react-router-dom v6.6
   

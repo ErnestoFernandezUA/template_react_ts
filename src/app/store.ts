@@ -17,17 +17,17 @@ import {
 import storage from 'redux-persist/lib/storage';
 
 // eslint-disable-next-line import/no-cycle
-import serverReducer from '../features/Posts/postsSlice';
+import postsReducer from '../features/Posts/postsSlice';
 
 const rootReducer = combineReducers({
-  server: serverReducer,
+  posts: postsReducer,
 });
 
 const persistConfig = {
   key: 'root',
   storage,
-  whitelist: ['photos', 'options'],
-  // blacklist: ['server', 'viewport'],
+  whitelist: ['reducer1', 'reducer2'],
+  // blacklist: ['posts'],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
@@ -36,7 +36,7 @@ const store = configureStore({
   reducer: persistedReducer,
   middleware: (getDefaultMiddleware) => getDefaultMiddleware({
     serializableCheck: {
-      ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER, 'server'],
+      ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER, 'posts'],
     },
   }),
 });
