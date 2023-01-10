@@ -1,20 +1,20 @@
 import { FunctionComponent } from "react";
-import { Link, useParams, useRouteLoaderData } from "react-router-dom";
-import { Post } from "../type/Post";
+import { Link, useParams } from "react-router-dom";
+import { useAppSelector } from "../app/hooks";
+import { selectPosts } from "../features/Posts/postsSlice";
 
 export const PostPage: FunctionComponent = () => {
   let { id } = useParams();
   console.log(id);
-  const posts = useRouteLoaderData("root") as Post[];
+  const posts = useAppSelector(selectPosts);
 
   const post = posts.find(post => String(post.id) === String(id));
-
   console.log(posts);
 
   return (
     <div style={{
-      width: '50rem',
-      margin: 'auto',
+      maxWidth: '50rem',
+      margin: '2rem auto',
       display: 'flex',
       alignItems: 'center',
       flexDirection: 'column',

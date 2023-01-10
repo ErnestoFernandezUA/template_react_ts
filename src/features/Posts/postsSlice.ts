@@ -27,6 +27,8 @@ export const getPostsAsync = createAsyncThunk(
   async () => {
     const response: Post[] = await getAllPosts();
 
+    console.log(response);
+
     return response;
   },
 );
