@@ -7,7 +7,7 @@ import { getAllPosts } from '../../api/post';
 // eslint-disable-next-line import/no-cycle
 import {
   RootState,
-} from '../../app/store';
+} from '../../store';
 import { Post } from '../../type/Post';
 
 export interface PostsState {
@@ -76,9 +76,10 @@ const postsSlice = createSlice({
 
 export default postsSlice.reducer;
 export const {
-  addPosts: add,
+  addPosts,
   setStatus,
   setError,
+  resetState,
 } = postsSlice.actions;
 
 export const selectPosts = (state: RootState) => state.posts.storage;
