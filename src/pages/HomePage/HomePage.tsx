@@ -1,10 +1,11 @@
-import { FunctionComponent } from "react";
-import { Link } from 'react-router-dom'
-import { useAppSelector } from "../../store/hooks";
-import { selectPosts } from "../../features/Posts/postsSlice";
-import { Post } from "../../type/Post";
-import './HomePage.scss'
- 
+import React, { FunctionComponent } from 'react';
+import { Link } from 'react-router-dom';
+import { useAppSelector } from '../../store/hooks';
+import { selectPosts } from '../../features/Posts/postsSlice';
+import { Post } from '../../type/Post';
+
+import './HomePage.scss';
+
 export const HomePage: FunctionComponent = () => {
   const posts = useAppSelector(selectPosts);
 
@@ -14,10 +15,11 @@ export const HomePage: FunctionComponent = () => {
       <ul style={{
         listStyle: 'none',
         textAlign: 'left',
-      }}>
+      }}
+      >
         {posts.map(post => (
           <li key={post.id}>
-            <Link 
+            <Link
               to={`post/${post.id}`}
               style={{
                 display: 'block',
@@ -28,7 +30,6 @@ export const HomePage: FunctionComponent = () => {
                 margin: '1rem',
                 padding: '1rem',
                 boxSizing: 'border-box',
-                
               }}
             >
               {`${post.id}. ${post.title}: ${post.body}`}
@@ -39,5 +40,4 @@ export const HomePage: FunctionComponent = () => {
 
     </div>
   );
-}
- 
+};

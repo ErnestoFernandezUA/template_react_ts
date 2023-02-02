@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 import {
   createAsyncThunk,
   createSlice,
@@ -27,6 +28,7 @@ export const getPostsAsync = createAsyncThunk(
   async () => {
     const response: Post[] = await getAllPosts();
 
+    // eslint-disable-next-line no-console
     console.log(response);
 
     return response;
@@ -55,7 +57,7 @@ const postsSlice = createSlice({
     },
     resetState: (state: PostsState) => {
       state = initialState;
-    }
+    },
   },
   extraReducers: (builder) => {
     builder
