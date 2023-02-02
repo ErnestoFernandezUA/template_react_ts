@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react';
-import { createHashRouter, Outlet, useLoaderData } from 'react-router-dom'
+import { createHashRouter, Outlet, useLoaderData } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from './store/hooks';
 import { getPostsAsync, selectPosts } from './features/Posts/postsSlice';
-import './App.scss';
 import { NotFound } from './pages/NotFound';
 import { HomePage } from './pages/HomePage/HomePage';
 import { PostPage } from './pages/PostPage/PostPage';
 import { getAllUsers } from './api/users';
+import './App.scss';
 import { User } from './type/User';
 
 export async function rootLoader() {
@@ -17,20 +17,20 @@ export async function rootLoader() {
 
 export const router = createHashRouter([
   {
-    path: "/",
+    path: '/',
     element: <App />,
     errorElement: <NotFound />,
     loader: rootLoader,
-    id: "root",
+    id: 'root',
     children: [
       {
-        path: "/",
+        path: '/',
         element: <HomePage />,
-        id: "homepage",
+        id: 'homepage',
         errorElement: <>Error on Homepage</>,
       },
       {
-        path: "/post/:id",
+        path: '/post/:id',
         element: <PostPage />,
         errorElement: <>Error on Homepage</>,
       },
@@ -47,8 +47,7 @@ function App() {
     if (posts.length === 0) {
       dispatch(getPostsAsync());
     }
-
-  }, [dispatch])
+  }, [dispatch]);
 
   return (
     <div className="App">
@@ -60,7 +59,7 @@ function App() {
       </header>
 
       <main className="App__Container">
-        <Outlet/>     
+        <Outlet />
       </main>
     </div>
   );
