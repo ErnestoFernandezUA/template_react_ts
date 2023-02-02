@@ -1,42 +1,33 @@
 /* eslint-disable no-param-reassign */
-import {
-  createAsyncThunk,
-  createSlice,
-  PayloadAction,
-} from '@reduxjs/toolkit';
-import { getAllPosts } from '../../api/post';
+import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { getAllPosts } from "../../api/post";
 // eslint-disable-next-line import/no-cycle
-import {
-  RootState,
-} from '../../store';
-import { Post } from '../../type/Post';
+import { RootState } from "../../store";
+import { Post } from "../../type/Post";
 
 export interface PostsState {
   storage: Post[];
-  statusLoading: 'idle' | 'loading' | 'failed';
+  statusLoading: "idle" | "loading" | "failed";
   error: unknown;
 }
 
 const initialState: PostsState = {
   storage: [],
-  statusLoading: 'idle',
+  statusLoading: "idle",
   error: null,
 };
 
-export const getPostsAsync = createAsyncThunk(
-  'posts/fetchPosts',
-  async () => {
-    const response: Post[] = await getAllPosts();
+export const getPostsAsync = createAsyncThunk("posts/fetchPosts", async () => {
+  const response: Post[] = await getAllPosts();
 
-    // eslint-disable-next-line no-console
-    console.log(response);
+  // eslint-disable-next-line no-console
+  console.log(response);
 
-    return response;
-  },
-);
+  return response;
+});
 
 const postsSlice = createSlice({
-  name: 'post',
+  name: "post",
   initialState,
   reducers: {
     addPosts: (state: PostsState, action: PayloadAction<Post[]>) => {
@@ -44,46 +35,40 @@ const postsSlice = createSlice({
     },
     setStatus: (
       state: PostsState,
-      action: PayloadAction<'idle' | 'loading' | 'failed'>,
+      action: PayloadAction<"idle" | "loading" | "failed">
     ) => {
       state.statusLoading = action.payload;
     },
-    setError: (
-      state: PostsState,
-      action: PayloadAction<unknown>,
-    ) => {
+    setError: (state: PostsState, action: PayloadAction<unknown>) => {
       state.error = action.payload;
-      state.statusLoading = 'failed';
+      state.statusLoading = "failed";
     },
     resetState: (state: PostsState) => {
-      state = initialState;
+      return { ...state, ...initialState };
     },
   },
   extraReducers: (builder) => {
     builder
-      .addCase(getPostsAsync.pending, (
-        state: PostsState,
-      ) => {
-        state.statusLoading = 'loading';
+      .addCase(getPostsAsync.pending, (state: PostsState) => {
+        state.statusLoading = "loading";
       })
       .addCase(getPostsAsync.fulfilled, (state, action) => {
         state.storage.push(...action.payload);
-        state.statusLoading = 'idle';
+        state.statusLoading = "idle";
       })
-      .addCase(getPostsAsync.rejected, (state) => {
-        state.statusLoading = 'failed';
+      .addCase(getPostsAsync.rejected, (state, action) => {
+        state.statusLoading = "failed";
+
+        // eslint-disable-next-line no-console
+        console.log(action);
       });
   },
 });
 
 export default postsSlice.reducer;
-export const {
-  addPosts,
-  setStatus,
-  setError,
-  resetState,
-} = postsSlice.actions;
+export const { addPosts, setStatus, setError, resetState } = postsSlice.actions;
 
 export const selectPosts = (state: RootState) => state.posts.storage;
-export const selectPostStatusLoading = (state: RootState) => state.posts.statusLoading;
+export const selectPostStatusLoading = (state: RootState) =>
+  state.posts.statusLoading;
 export const selectPostError = (state: RootState) => state.posts.error;
