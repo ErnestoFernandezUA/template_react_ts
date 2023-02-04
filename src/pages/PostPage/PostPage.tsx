@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import { FunctionComponent } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { resetState, selectPosts } from '../../features/Posts/postsSlice';
@@ -6,7 +6,7 @@ import { resetState, selectPosts } from '../../features/Posts/postsSlice';
 import './PostPage.scss';
 
 export const PostPage: FunctionComponent = () => {
-  let { id } = useParams();
+  const { id } = useParams();
 
   // eslint-disable-next-line no-console
   console.log(id);
@@ -17,9 +17,6 @@ export const PostPage: FunctionComponent = () => {
   dispatch(resetState());
 
   const post = posts.find(p => String(p.id) === String(id));
-
-  // eslint-disable-next-line no-console
-  console.log(posts);
 
   return (
     <div

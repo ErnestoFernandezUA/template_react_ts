@@ -1,9 +1,0 @@
-{
-  "ignore": [
-      "node_module",
-      "**/test/*.html",
-  ],
-  "rules": {
-    "rule-id": true
-  }
-}

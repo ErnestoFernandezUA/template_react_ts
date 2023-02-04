@@ -36,7 +36,10 @@ const store = configureStore({
   reducer: persistedReducer,
   middleware: (getDefaultMiddleware) => getDefaultMiddleware({
     serializableCheck: {
-      ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER, 'posts'],
+      ignoredActions: [
+        FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER,
+        'posts',
+      ],
     },
   }),
 });
